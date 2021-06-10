@@ -1,5 +1,12 @@
-type User @model {
+type User
+	@model
+	@auth(
+		rules: [
+			{ allow: groups, groups: ["admin"] }
+			{ allow: owner, ownerField: "username", operations: [read] }
+		]
+	) {
 	id: ID!
 	name: String!
-	description: String
+	email: String!
 }

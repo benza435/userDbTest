@@ -10,6 +10,17 @@
       "StackName": "amplify-userdbtest-dev-125600",
       "StackId": "arn:aws:cloudformation:eu-west-2:073566067275:stack/amplify-userdbtest-dev-125600/d454c810-c9e2-11eb-b574-06c5b48d8252",
       "AmplifyAppId": "d1vad0an1qedci"
+    },
+    "categories": {
+      "function": {
+        "userDbTestResourcePostConfirmation": {
+          "deploymentBucketName": "amplify-userdbtest-dev-125600-deployment",
+          "s3Key": "amplify-builds/userDbTestResourcePostConfirmation-636c6e7549317175672f-build.zip"
+        }
+      },
+      "auth": {
+        "userDbTestResource": {}
+      }
     }
   }
 }

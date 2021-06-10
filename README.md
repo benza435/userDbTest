@@ -10,11 +10,11 @@
 -choose access keys
 
 - eu-west-2
-- wait a few mins  
+- wait a few mins
 
 now we are going to add amplify api
 
-ben@ben-Predator-PH317-53:~/nc_/project/userDbTest$ amplify add api
+ben@ben-Predator-PH317-53:~/nc\_/project/userDbTest$ amplify add api
 ? Please select from one of the below mentioned services: GraphQL
 ? Provide API name: userdbtest
 ? Choose the default authorization type for the API API key
@@ -37,44 +37,27 @@ advanced configuration -Y
 ? Select the operations you want to permit on userdbtest Query, Mutation
 
 You can access the following resource attributes as environment variables from your Lambda function
-        API_USERDBTEST_GRAPHQLAPIENDPOINTOUTPUT
-        API_USERDBTEST_GRAPHQLAPIIDOUTPUT
-	API_USERDBTEST_GRAPHQLAPIKEYOUTPUT
-	ENV
-	REGION
+API_USERDBTEST_GRAPHQLAPIENDPOINTOUTPUT
+API_USERDBTEST_GRAPHQLAPIIDOUTPUT
+API_USERDBTEST_GRAPHQLAPIKEYOUTPUT
+ENV
+REGION
 ? Do you want to invoke this function on a recurring schedule? No
 ? Do you want to configure Lambda layers for this function? Yes
-? Enter up to 5 existing Lambda layer ARNs (comma-separated): 
-aborted here because it was full of shit
+? Enter up to 5 existing Lambda layer ARNs (comma-separated):
 
-we are about to run `amplify add auth`
+### aborted here because it was full of shit
 
+`amplify add auth`
+-manual configuration
+-first option
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  `amplify add auth`  
-  -choose manual config
-
-Do you want to use the default authentication and security configuration? Manual configuration
-Select the authentication/authorization services that you want to use: User Sign-Up, Sign-In, connected with AWS IAM controls (Enables per-user Storage feature
-s for images or other content, Analytics, and more)
-Please provide a friendly name for your resource that will be used to label this category in the project: friendlyResource
-Please enter a name for your identity pool. friendlyResourceIdentityPool
+Please provide a friendly name for your resource that will be used to label this category in the project
+: userDbTestResource
+Please enter a name for your identity pool. userDbTestIdentityPool
 Allow unauthenticated logins? (Provides scoped down permissions that you can control via AWS IAM) No
 Do you want to enable 3rd party authentication providers in your identity pool? No
-Please provide a name for your user pool: friendlyResourceUserPool
+Please provide a name for your user pool: userDbTestUserPool
 Warning: you will not be able to edit these selections.
 How do you want users to be able to sign in? Username
 Do you want to add User Pool Groups? Yes
@@ -96,20 +79,93 @@ Do you want to use an OAuth flow? No
 ? Do you want to configure Lambda Triggers for Cognito? Yes
 ? Which triggers do you want to enable for Cognito Post Confirmation
 ? What functionality do you want to use for Post Confirmation Create your own module
-Successfully added resource friendlyResourcePostConfirmation locally.
+Successfully added resource userDbTestResourcePostConfirmation locally.
 
-ext steps:
-Check out sample function code generated in <project-dir>/amplify/backend/function/friendlyResourcePostConfirmation/src
+Next steps:
+Check out sample function code generated in <project-dir>/amplify/backend/function/userDbTestResourcePostConfirmation/src
 "amplify function build" builds all of your functions currently in the project
 "amplify mock function <functionName>" runs your function locally
 "amplify push" builds all of your local backend resources and provisions them in the cloud
 "amplify publish" builds all of your local backend and front-end resources (if you added hosting category) and provisions them in the cloud
 Successfully added the Lambda function locally
-? Do you want to edit your custom function now? Yes
-? Choose your default editor: Visual Studio Code
-Edit the file in your editor: /home/ben/nc\_/project/ramblrWithDynamodb/amplify/backend/function/friendlyResourcePostConfirmation/src/custom.js
-? Press enter to continue
+? Do you want to edit your custom function now? (Y/n)
 
--renamed custom.js to index.js, then:
--copy code from [link](https://docs.amplify.aws/guides/functions/cognito-trigger-lambda-dynamodb/q/platform/js#create-the-lambda-function)
--saved index.js
+---
+
+? Choose your default editor: Visual Studio Code
+Edit the file in your editor: /home/ben/nc\_/project/userDbTest/amplify/backend/function/userDbTestResourcePostConfirmation/src/custom.js
+? Press enter to continue
+Successfully added auth resource userDbTestResource locally
+
+Some next steps:
+"amplify push" will build all your local backend resources and provision it in the cloud
+"amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud
+-0--------------
+
+`amplify update api`
+? Please select from one of the below mentioned services: GraphQL
+? Select from the options below Walkthrough all configurations
+? Choose the default authorization type for the API Amazon Cognito User Pool
+Use a Cognito user pool configured as a part of this project.
+? Do you want to configure advanced settings for the GraphQL API Yes, I want to make some additional chan
+ges.
+? Configure additional auth types? No
+? Enable conflict detection? No
+
+The following types do not have '@auth' enabled. Consider using @auth with @model - User
+Learn more about @auth here: https://docs.amplify.aws/cli/graphql-transformer/auth
+
+GraphQL schema compiled successfully.
+
+Edit your schema at /home/ben/nc*/project/userDbTest/amplify/backend/api/userdbtest/schema.graphql or place .graphql files in a directory at /home/ben/nc*/project/userDbTest/amplify/backend/api/userdbtest/schema
+The API_KEY auth type has been removed from the API.
+If other resources depend on this API, run "amplify update <category>" and reselect this API to remove the dependency on the API key.
+⚠️ This must be done before running "amplify push" to prevent a push failure
+Successfully updated resource
+
+# this may have been a mistake
+
+updated amplify/backend/api/userdbtest/schema.graphql
+
+en@ben-Predator-PH317-53:~/nc\_/project/userDbTest$ amplify push --y
+✔ Successfully pulled backend environment dev from the cloud.
+
+Current Environment: dev
+
+`amplify push --y`
+
+| Category | Resource name                      | Operation | Provider plugin   |
+| -------- | ---------------------------------- | --------- | ----------------- |
+| Api      | userdbtest                         | Create    | awscloudformation |
+| Function | userDbTestResourcePostConfirmation | Create    | awscloudformation |
+| Auth     | userPoolGroups                     | Create    | awscloudformation |
+| Auth     | userDbTestResource                 | Create    | awscloudformation |
+
+GraphQL schema compiled successfully.
+
+https://6xqblemyzreutmgj2dvtwti3ui.appsync-api.eu-west-2.amazonaws.com/graphql
+returns
+
+{
+errors: [
+{
+errorType: "UnauthorizedException",
+message: "Missing authorization header"
+}
+]
+}
+
+`amplify update api`
+? Please select from one of the below mentioned services: GraphQL
+? Select from the options below Update auth settings
+? Choose the default authorization type for the API Amazon Cognito User Pool
+Use a Cognito user pool configured as a part of this project.
+? Configure additional auth types? Yes
+? Choose the additional authorization types you want to configure for the API IAM
+
+GraphQL schema compiled successfully.
+
+Edit your schema at /home/ben/nc*/project/userDbTest/amplify/backend/api/userdbtest/schema.graphql or place .graphql files in a directory at /home/ben/nc*/project/userDbTest/amplify/backend/api/userdbtest/schema
+Successfully updated resource
+
+`amplify push`
