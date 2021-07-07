@@ -46,7 +46,7 @@ REGION
 ? Do you want to configure Lambda layers for this function? Yes
 ? Enter up to 5 existing Lambda layer ARNs (comma-separated):
 
-### aborted here because it was full of shit
+### aborted here because we have devjated too far from the docs
 
 `amplify add auth`
 -manual configuration
